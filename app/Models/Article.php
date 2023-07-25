@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\Title;
 use App\QueryFilters\SortFilter;
 use App\QueryFilters\StatusFilter;
 use Illuminate\Database\Eloquent\Builder;
@@ -12,6 +13,15 @@ use Illuminate\Pipeline\Pipeline;
 class Article extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        "title",
+        "status",
+    ];
+
+    protected $casts = [
+        "title" => Title::class, // Usando un cast personalizado, en este caso el campo 'title' sera casteado a la clase Title, especificamente retornara un ValueObject de la clase Text
+    ];
 
     public function scopeFiltered(Builder $builder): Builder
     {
