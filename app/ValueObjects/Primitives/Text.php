@@ -10,7 +10,7 @@ class Text extends ValueObject
 {
     protected string|Stringable $value;
 
-    public function __construct(string|Stringable $value)
+    protected function __construct(string|Stringable $value)
     {
         $this->value = trim($value);
 

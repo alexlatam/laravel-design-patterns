@@ -8,7 +8,7 @@ use App\ValueObjects\Primitives\Text;
 class Email extends Text
 {
 
-    public function __construct(string $value)
+    protected function __construct(string $value)
     {
         parent::__construct($value);
 

@@ -8,7 +8,7 @@ class Number extends ValueObject
 {
     protected int|float $value;
 
-    public function __construct(int|float $value)
+    protected function __construct(int|float $value)
     {
         $this->value = $value;
 

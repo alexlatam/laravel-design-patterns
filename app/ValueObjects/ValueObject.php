@@ -12,7 +12,7 @@ abstract class ValueObject implements Arrayable
     abstract public function value();
 
     // Retornara un objeto de la clase que sea instancianda en su momento
-    // Crae una instancia de un Value Object
+    // Crae una instancia de un Value Object. Evitaremos crear instancias de los VO mediante el constructor
     public static function make(mixed ...$value): static
     {
         return new static(...$value);

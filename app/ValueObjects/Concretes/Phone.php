@@ -7,7 +7,7 @@ use Illuminate\Support\Stringable;
 
 class Phone extends Text
 {
-    public function __construct(string|Stringable $value)
+    protected function __construct(string|Stringable $value)
     {
         parent::__construct($value);
 

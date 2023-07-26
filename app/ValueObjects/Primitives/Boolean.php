@@ -6,18 +6,16 @@ use App\ValueObjects\ValueObject;
 use Illuminate\Support\Stringable;
 use InvalidArgumentException;
 
-class Text extends ValueObject
+class Boolean extends ValueObject
 {
     protected string|Stringable $value;
 
     protected array $trueValues = ['true', '1', 'on', 1, 'yes', 'si', 'sí'];
     protected array $falseValues = ['false', '0', 'off', 0, 'no'];
 
-    public function __construct(bool|int|string|Stringable $value)
+    protected function __construct(bool|int|string|Stringable $value)
     {
         !is_bool($value) ? $this->handleNonBoolean($value) : $this->value = $value;
-
-        $this->validate();
     }
 
     public function value(): bool
