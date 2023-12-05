@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
 
-class ArticleController extends Controller
+final class ArticleController extends Controller
 {
     public function __invoke(): Renderable
     {
