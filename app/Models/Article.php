@@ -23,6 +23,10 @@ class Article extends Model
         "title" => Title::class, // Usando un cast personalizado, en este caso el campo 'title' sera casteado a la clase Title, especificamente retornara un ValueObject de la clase Text
     ];
 
+    /**
+     * Esto es un scope, es una funcion que nos permite encapsular una consulta
+     * Este scope puede ser usado en cualquier parte del codigo. Ejemplo: Article::filtered()->get()
+     */
     public function scopeFiltered(Builder $builder): Builder
     {
         // Con query builder sencillo
