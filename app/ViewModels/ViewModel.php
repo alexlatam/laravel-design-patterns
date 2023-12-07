@@ -16,7 +16,7 @@ abstract class ViewModel implements Arrayable
         return collect((new ReflectionClass($this))->getMethods())
             // Filtra el metodo constructor y el metodo toArray. Osea no los incluye en el array final
             ->reject(fn (ReflectionMethod $method) => in_array($method->getName(), ['__construct', 'toArray']))
-            // Filtra los metodos que no sean publicos. Osea solo incluye los metodos publicos
+            // Nos quedamos solo con los metodos publicos
             ->filter(fn (ReflectionMethod $method) => in_array('public', Reflection::getModifierNames($method->getModifiers())))
             // Mapea los metodos y retorna un array asociativo con el nombre del metodo en snake case y el valor que retorna el metodo
             // Ej. ['form_create_meta_data' => $this->formCreateMetaData()]

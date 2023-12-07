@@ -4,16 +4,21 @@ namespace App\QueryFilters;
 
 use Closure;
 use Illuminate\Database\Eloquent\Builder;
+use Reflection;
+use ReflectionClass;
 
 abstract class QueryFilter
 {
-    // Esta funcion debe llamarse asi, ya que es la que se encarga de ejecutar la logica de los filtros
+    // the name of the filter
+    protected string $name;
+
+    // Esta funcion es la que se encarga de ejecutar la logica de los filtros
     // Ademas asi es como esta definida en la clase Pipeline::class
     // en caso de querer llamarlo de otra manera. Sera necesario usar el metodo via('new_name') en la clase Pipeline::class. Ver el modelo Article::class
     public function handle(Builder $builder, Closure $next): Builder
     {
         // Verificamos si el parametro del filtro esta presente en la url
-        if (!request()->query($this->filterName())) {
+        if (!request()->query($this->name)) {
             // Pasamos el builder al siguiente filtro
             return $next($builder);
         }
@@ -28,8 +33,13 @@ abstract class QueryFilter
         return $next($builder);
     }
 
-    // Este emtodo contrendra la logica del filtro
+    // Este metodo contrendra la logica del filtro.
+    // Esta logica es propia de cada filtro. Cada filtro tendra su propia logica
     abstract protected function apply(Builder $builder): Builder;
-    // En este metodo definimos el parametro que se envia en la url(osea el parametro que el filtro usara para filtrar)
-    abstract protected function filterName(): string;
+
+    protected function name(): string
+    {
+        // get the name of the current class
+         return (new ReflectionClass($this))->getShortName();
+    }
 }
