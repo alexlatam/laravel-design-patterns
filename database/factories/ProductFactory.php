@@ -18,7 +18,7 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => 1,
+            'user_id' => User::first()->id,
             'title' => $this->faker->unique()->sentence(5),
             'description' => $this->faker->text(200),
             'price' => $this->faker->randomFloat(2, 1, 1000),
