@@ -15,3 +15,5 @@ Route::get('/', function () {
 
 // Insert a new sale into the database and get the same sale using CQRS pattern
 Route::get('/cqrs', SalesController::class);
+
+Route::get('docs/exceptions/{code}', fn ($code) => $code)->name('docs.exceptions');

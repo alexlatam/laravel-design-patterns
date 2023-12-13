@@ -60,6 +60,7 @@ class AppServiceProvider extends ServiceProvider
          * En este caso, solo tenemos el command CreateSaleCommand y el command handler CreateSaleCommandHandler
          * Esto quiere decir que cuando se despache el command CreateSaleCommand, se ejecutara el command handler CreateSaleCommandHandler
          * Y el command handler CreateSaleCommandHandler se encargara de ejecutar la lógica de negocio del command CreateSaleCommand
+         * SIEMPRE la relación sera de 1 a 1 entre el Command y su Handler
          */
         $commandBus->register([
             CreateSaleCommand::class => CreateSaleCommandHandler::class,
@@ -71,7 +72,8 @@ class AppServiceProvider extends ServiceProvider
         $queryBus = app(QueryBusInterface::class);
 
         /**
-         * Mapeamos los queries con sus respectivos handlers
+         * Mapeamos los queries con sus respectivo handler
+         * SIEMPRE la relación sera de 1 a 1 entre el Query y su Handler
          */
         $queryBus->register([
             FindSaleQuery::class => FindSaleQueryHandler::class,
