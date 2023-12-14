@@ -8,6 +8,7 @@ use App\Casts\Title;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Collection;
 
 final class Product extends Model
 {
@@ -30,5 +31,10 @@ final class Product extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public static function getAll(): Collection
+    {
+        return self::all();
     }
 }

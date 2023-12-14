@@ -6,7 +6,7 @@ use App\ValueObjects\ValueObject;
 use Illuminate\Support\Stringable;
 use InvalidArgumentException;
 
-class Text extends ValueObject
+abstract class StringValueObject extends ValueObject
 {
     protected string|Stringable $value;
 

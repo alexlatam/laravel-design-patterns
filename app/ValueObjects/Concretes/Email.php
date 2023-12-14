@@ -3,9 +3,9 @@
 namespace App\ValueObjects\Concretes;
 
 
-use App\ValueObjects\Primitives\Text;
+use App\ValueObjects\Primitives\StringValueObject;
 
-class Email extends Text
+class Email extends StringValueObject
 {
 
     protected function __construct(string $value)

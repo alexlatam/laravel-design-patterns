@@ -2,10 +2,10 @@
 
 namespace App\ValueObjects\Concretes;
 
-use App\ValueObjects\Primitives\Text;
+use App\ValueObjects\Primitives\StringValueObject;
 use Illuminate\Support\Stringable;
 
-class Url extends Text
+class Url extends StringValueObject
 {
     protected function __construct(string|Stringable $value)
     {
