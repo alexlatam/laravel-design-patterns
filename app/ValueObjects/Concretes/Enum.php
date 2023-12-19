@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\ValueObject\Concretes;
+namespace App\ValueObjects\Concretes;
 
 use ReflectionClass;
-use function CodelyTv\Utils\Shared\snake_to_camel;
 use function Lambdish\Phunctional\reindex;
 
 abstract class Enum
@@ -74,12 +73,17 @@ abstract class Enum
     private static function keysFormatter(): callable
     {
         return function ($unused, string $key): string {
-            return snake_to_camel(strtolower($key));
+            return $this->toCamelCase(strtolower($key));
         };
     }
 
     public function __toString(): string
     {
         return (string) $this->value();
+    }
+
+    private static function toCamelCase(string $text): string
+    {
+        return lcfirst(str_replace('_', '', ucwords($text, '_')));
     }
 }
