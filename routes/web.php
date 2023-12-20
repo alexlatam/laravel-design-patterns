@@ -10,7 +10,17 @@ use App\Http\Controllers\SalesController;
 
 Route::get('/articles', ArticleController::class);
 
-Route::resource('products', ProductController::class);
+Route::resource('products', ProductController::class, [
+    'name' => [
+        'index' => 'app.products.index',
+        'create' => 'app.products.create',
+        'store' => 'app.products.store',
+        'show' => 'app.products.show',
+        'edit' => 'app.products.edit',
+        'update' => 'app.products.update',
+        'destroy' => 'app.products.destroy',
+    ],
+]);
 
 Route::get('/', function () {
     return view('welcome');

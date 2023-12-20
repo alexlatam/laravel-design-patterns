@@ -19,13 +19,17 @@ final class Product extends Model
         "description",
         "price",
         "image",
+        "stock",
+        "available",
         "status",
     ];
 
-    protected $cast = [
+    protected array $cast = [
         "title" => Title::class,
         "price" => Money::class,
         "image" => File::class,
+        "stock" => "integer",
+        "available" => "boolean",
     ];
 
     public function user(): BelongsTo
