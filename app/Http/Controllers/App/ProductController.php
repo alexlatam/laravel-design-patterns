@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\App;
 
+use App\Events\App\NewProductCreated;
 use App\Http\Controllers\Controller;
 use App\Models\FeaturedProduct;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -20,12 +22,20 @@ class ProductController extends Controller
             "available" => "required|boolean",
         ]);
 
-        FeaturedProduct::create([
+        $product = FeaturedProduct::create([
             "name" => request("name"),
             "description" => request("description"),
             "stock" => request("stock"),
             "available" => request("available"),
         ]);
+
+        /**
+         * Despacho el evento NewProductCreated
+         * Sera escuchado por el listener SendNewProductNotification
+         * El listener se encargara de enviar la notificacion
+         */
+        NewProductCreated::dispatch(Auth::user(), $product);
+
         return response()->json([], 201);
     }
 

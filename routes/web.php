@@ -38,7 +38,9 @@ Route::get('/articles-all', fn() => Product::getAll());
 
 Route::get('/users-criteria', GetUsersByCriteriaController::class);
 
+
 /**
+ * CHAT WITH LARAVEL ECHO, REDIS AND SOCKET.IO
  * Al ejecutar esta ruta se disparara el evento PublicMessage
  */
 Route::get('/chat', function () {
