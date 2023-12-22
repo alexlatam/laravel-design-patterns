@@ -1,0 +1,30 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('transaction_counts', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('uuid'); // uuid de la transacción
+            $table->string('user_id'); // id del usuario que realizó la transacción
+            $table->integer('total')->default(0); // total
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('transaction_counts');
+    }
+};
