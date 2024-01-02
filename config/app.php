@@ -170,6 +170,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         RepositoryServiceProvider::class,
+        Hex\Users\Infrastructure\ServiceProviders\CreateUserCommandBusServiceProvider::class,
+        Hex\Users\Infrastructure\ServiceProviders\CreateUserRouteServiceProvider::class,
     ])->toArray(),
 
     /*

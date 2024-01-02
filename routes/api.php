@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\App\ProductController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,3 +28,6 @@ Route::resource("products", ProductController::class)->only("store", "index", "s
     "update" => "api.products.update",
     "destroy" => "api.products.destroy",
 ]);
+
+// Update Reviews using an Application Service, with Event Dispatcher and Listeners
+Route::put('/reviews', [ReviewController::class, 'update'])->name('api.reviews.update');

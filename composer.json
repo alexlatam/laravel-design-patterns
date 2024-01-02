@@ -30,7 +30,8 @@
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
             "Modules\\": "src/Modules/",
-            "Core\\": "src/Core/"
+            "Core\\": "src/Core/",
+            "Hex\\": "src/Hex/"
         }
     },
     "autoload-dev": {

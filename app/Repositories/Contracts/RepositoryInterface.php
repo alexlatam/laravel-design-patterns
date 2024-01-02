@@ -13,4 +13,5 @@ interface RepositoryInterface
     public function update(int $id): bool;
     public function delete(int $id): bool;
     public function find(int $id): JsonResource;
+    public function findOrFail(int $id): JsonResource;
 }

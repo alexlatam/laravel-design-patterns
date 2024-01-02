@@ -44,4 +44,8 @@ final class EloquentProductRepository implements ProductRepositoryInterface
     }
 
 
+    public function findOrFail(int $id): JsonResource
+    {
+        // TODO: Implement findOrFail() method.
+    }
 }
