@@ -1,6 +1,6 @@
 <?php
 
-namespace App\StorableEvents\EventSourcing;
+namespace App\StorableEvents\EventSourcing\Sync;
 
 use Spatie\EventSourcing\StoredEvents\ShouldBeStored;
 

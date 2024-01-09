@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Models\EventSourcing;
+namespace App\Models\EventSourcing\Sync;
 
-use App\Models\User;
-use App\StorableEvents\EventSourcing\TransactionCountCreated;
+use App\StorableEvents\EventSourcing\Sync\TransactionCountCreated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -23,9 +22,7 @@ class TransactionCount extends Model
 
     public static function incrementTotal(Citizen $citizen): void
     {
-        $user = User::where('id', $citizen->user_id)->first();
-
-        $transactionCounter = self::firstOrCreate(['user_id' => $user->id]);
+        $transactionCounter = self::firstOrCreate(['user_id' => $citizen->user_id]);
 
         $transactionCounter->total += 1;
 

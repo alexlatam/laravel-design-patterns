@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models\EventSourcing;
+namespace App\Models\EventSourcing\Sync;
 
 use App\Models\User;
-use App\StorableEvents\EventSourcing\CitizenCreated;
-use App\StorableEvents\EventSourcing\ItemsDelivered;
+use App\StorableEvents\EventSourcing\Sync\CitizenCreated;
+use App\StorableEvents\EventSourcing\Sync\ItemsDelivered;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -40,6 +40,7 @@ class Citizen extends Model
     {
         $attributes['uuid'] = Str::uuid()->toString();
 
+        // Disparamos el evento de creación del ciudadano. CitizenCreated
         event(new CitizenCreated($attributes['uuid'], $attributes));
 
         return self::uuid($attributes['uuid']);

@@ -6,6 +6,8 @@ namespace Database\Seeders;
 
 use App\Models\Article;
 use App\Models\Citizen;
+use App\Models\EventSourcing\Sync\Citizen as EventSourcingCitizen;
+use App\Models\EventSourcing\Sync\TransactionCount;
 use App\Models\Product;
 use App\Models\User;
 use Faker\Provider\es_VE\Address;
@@ -42,5 +44,30 @@ class DatabaseSeeder extends Seeder
                 }
             }
         }
+
+
+        for($i = 0; $i < 10; $i++) {
+            User::factory(random_int(5, 25))->create()->each(function (User $user) {
+                $citizen = EventSourcingCitizen::createWithAttributes([
+                    "user_id" => $user->id,
+                    "community" => Address::community(),
+                ]);
+
+                TransactionCount::createWithAttributes([
+                    'user_id' => $user->id,
+                    'total' => 0,
+                ]);
+
+                $deliveries = random_int(0, 5);
+                if ($deliveries > 0) {
+                    for ($j = 0; $j < $deliveries; $j++) {
+                        $citizen
+                            ->deliveryItems(random_int(0, 9));
+                    }
+                }
+            });
+        }
+
+
     }
 }

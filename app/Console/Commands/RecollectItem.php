@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\EventSourcing\Citizen;
+use App\Models\EventSourcing\Sync\Citizen;
 use Illuminate\Console\Command;
 
 class RecollectItem extends Command

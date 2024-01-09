@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->uuid('id');
-            $table->enum('state', [ReviewStates::APPROVED, ReviewStates::REJECTED, ReviewStates::IN_PROGRESS]);
+            $table->enum('state', [ReviewStates::APPROVED->name, ReviewStates::REJECTED->name, ReviewStates::IN_PROGRESS->name]);
             $table->integer('score');
             $table->string('extra');
             $table->integer('id_error');

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Projectors;
+namespace App\Projectors\Sync;
 
-use App\Models\EventSourcing\Citizen;
-use App\StorableEvents\EventSourcing\CitizenCreated;
-use App\StorableEvents\EventSourcing\ItemsDelivered;
+use App\Models\EventSourcing\Sync\Citizen;
+use App\StorableEvents\EventSourcing\Sync\CitizenCreated;
+use App\StorableEvents\EventSourcing\Sync\ItemsDelivered;
 use Spatie\EventSourcing\EventHandlers\Projectors\Projector;
 
 class CitizenProjector extends Projector
