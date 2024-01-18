@@ -31,7 +31,8 @@
             "Database\\Seeders\\": "database/seeders/",
             "Modules\\": "src/Modules/",
             "Core\\": "src/Core/",
-            "Hex\\": "src/Hex/"
+            "Hex\\": "src/Hex/",
+            "DomainEvents\\": "src/DomainEvents/"
         }
     },
     "autoload-dev": {

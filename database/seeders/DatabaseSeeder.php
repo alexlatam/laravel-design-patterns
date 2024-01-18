@@ -12,11 +12,13 @@ use App\Models\Product;
 use App\Models\User;
 use Faker\Provider\es_VE\Address;
 use Illuminate\Database\Seeder;
+use Random\RandomException;
 
 class DatabaseSeeder extends Seeder
 {
     /**
      * Seed the application's database.
+     * @throws RandomException
      */
     public function run(): void
     {
@@ -38,15 +40,15 @@ class DatabaseSeeder extends Seeder
             ]);
 
             $deliveries = random_int(0, 5);
-            if($deliveries > 0) {
-                for ($i=0; $i < $deliveries; $i++) {
+            if ($deliveries > 0) {
+                for ($i = 0; $i < $deliveries; $i++) {
                     $citizen->deliveryItems($deliveries);
                 }
             }
         }
 
 
-        for($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             User::factory(random_int(5, 25))->create()->each(function (User $user) {
                 $citizen = EventSourcingCitizen::createWithAttributes([
                     "user_id" => $user->id,
@@ -67,7 +69,6 @@ class DatabaseSeeder extends Seeder
                 }
             });
         }
-
 
     }
 }
