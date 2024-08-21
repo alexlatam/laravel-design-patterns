@@ -5,29 +5,31 @@ namespace DomainEvents\RecordOnAggNamedConstructorAndDispatchOnApplicationServic
 final class UserRegisteredDomainEvent extends DomainEvent
 {
     public function __construct(
-        private readonly string $id,
+        private readonly string $aggregateId,
         private readonly string $name,
         private readonly string $email,
-        private readonly string $password
-    ) {}
-
-    public function getId(): string
-    {
-        return $this->id;
+        string                  $eventId = null,
+        string                  $occurredOn = null
+    ) {
+        parent::__construct($aggregateId, $eventId, $occurredOn);
     }
 
-    public function getName(): string
+    public function toPrimitives(): array
     {
-        return $this->name;
+        return [
+            'id' => $this->aggregateId,
+            'name' => $this->name,
+            'email' => $this->email
+        ];
     }
 
-    public function getEmail(): string
+    public static function eventName(): string
     {
-        return $this->email;
+        return 'application_name.bounded_context.user.registered';
     }
 
-    public function getPassword(): string
+    public static function fromPrimitives(string $aggregateId, array $body, string $eventId, string $occurredOn): DomainEvent
     {
-        return $this->password;
+        return new self($aggregateId, $body['name'], $body['email'], $eventId, $occurredOn);
     }
 }

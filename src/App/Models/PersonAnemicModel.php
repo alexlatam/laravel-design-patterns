@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * This is an example of an Anemic Model.
+ * A model that only contains data and no business logic. Doesn't contain any behavior.
+ */
 final class PersonAnemicModel
 {
     private function __construct(private string $name, private int $age) {

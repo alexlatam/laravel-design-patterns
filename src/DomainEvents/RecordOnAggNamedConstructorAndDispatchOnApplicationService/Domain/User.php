@@ -2,16 +2,29 @@
 
 namespace DomainEvents\RecordOnAggNamedConstructorAndDispatchOnApplicationService\Domain;
 
+use DomainEvents\RecordOnAggNamedConstructorAndDispatchOnApplicationService\Domain\Events\UserArchivedDomainEvent;
+use DomainEvents\RecordOnAggNamedConstructorAndDispatchOnApplicationService\Domain\Events\UserEmailUpdatedDomainEvent;
+use DomainEvents\RecordOnAggNamedConstructorAndDispatchOnApplicationService\Domain\Events\UserNameUpdatedDomainEvent;
 use DomainEvents\RecordOnAggNamedConstructorAndDispatchOnApplicationService\Domain\Events\UserRegisteredDomainEvent;
+use DomainEvents\RecordOnAggNamedConstructorAndDispatchOnApplicationService\Domain\ValueObjects\UserEmail;
+use DomainEvents\RecordOnAggNamedConstructorAndDispatchOnApplicationService\Domain\ValueObjects\UserId;
+use DomainEvents\RecordOnAggNamedConstructorAndDispatchOnApplicationService\Domain\ValueObjects\UserName;
+use DomainEvents\RecordOnAggNamedConstructorAndDispatchOnApplicationService\Domain\ValueObjects\UserPassword;
+use DomainEvents\RecordOnAggNamedConstructorAndDispatchOnApplicationService\Domain\ValueObjects\UserStatus;
 
 class User extends AggregateRoot
 {
+    private UserStatus $status;
+
     function __construct(
         private readonly UserId       $uuid,
-        private readonly UserName     $name,
-        private readonly UserEmail    $email,
+        private UserName              $name,
+        private UserEmail             $email,
         private readonly UserPassword $password,
-    ) {}
+    )
+    {
+        $this->status = new UserStatus(UserStatus::ACTIVE);
+    }
 
     public static function create(string $id, string $name, string $email, string $password): self
     {
@@ -27,10 +40,9 @@ class User extends AggregateRoot
          * El evento registrado es: Usuario Registrado [UserRegisteredDomainEvent]
          */
         $user->record(new UserRegisteredDomainEvent(
-            id: $user->uuid->value(),
+            aggregateId: $user->uuid->value(),
             name: $user->name->value(),
-            email: $user->email->value(),
-            password: $user->password->value(),
+            email: $user->email->value()
         ));
 
         return $user;
@@ -44,5 +56,38 @@ class User extends AggregateRoot
             'email' => $this->email->value(),
             'password' => $this->password->value(),
         ];
+    }
+
+    public function updateEmail(string $email): void
+    {
+        $this->email = new UserEmail($email);
+
+        $this->record(new UserEmailUpdatedDomainEvent(
+            aggregateId: $this->uuid->value(),
+            email: $this->email->value(),
+        ));
+    }
+
+    public function updateName(string $name): void
+    {
+        $this->name = new UserName($name);
+
+        $this->record(new UserNameUpdatedDomainEvent(
+            aggregateId: $this->uuid->value(),
+            name: $this->name->value(),
+        ));
+    }
+
+    /**
+     * Metdo para archivar un usuario
+     */
+    public function archive(): void
+    {
+        $this->status = new UserStatus(UserStatus::ARCHIVED);
+
+        $this->record(new UserArchivedDomainEvent(
+            aggregateId: $this->uuid->value(),
+            status: $this->status->value(),
+        ));
     }
 }

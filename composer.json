@@ -13,6 +13,7 @@
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
         "predis/predis": "^2.2",
+        "ramsey/uuid": "^4.7",
         "spatie/laravel-event-sourcing": "^7.3"
     },
     "require-dev": {
@@ -32,7 +33,12 @@
             "Modules\\": "src/Modules/",
             "Core\\": "src/Core/",
             "Hex\\": "src/Hex/",
-            "DomainEvents\\": "src/DomainEvents/"
+            "DomainEvents\\": "src/DomainEvents/",
+            "Testing\\": "src/Testing/",
+            "Criteria\\": "src/Criteria/",
+            "CQRS\\": "src/CQRS/",
+            "Cache\\": "src/Cache/",
+            "Transactions\\": "src/Transactions/"
         }
     },
     "autoload-dev": {

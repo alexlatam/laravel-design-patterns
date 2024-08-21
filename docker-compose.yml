@@ -47,9 +47,22 @@ services:
                 - '-p${DB_PASSWORD}'
             retries: 3
             timeout: 5s
+    elasticsearch:
+        image: docker.elastic.co/elasticsearch/elasticsearch:8.12.0
+        environment:
+            discovery.type: single-node
+            network.host: 0.0.0.0
+            xpack.security.enabled: 'true'
+        ports:
+            - 9200:9200
+        volumes:
+            - ./etc/elastic/config.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+            - es_data:/usr/share/elasticsearch/data
 networks:
     sail:
         driver: bridge
 volumes:
     sail-mysql:
         driver: local
+    db_data:
+    es_data:

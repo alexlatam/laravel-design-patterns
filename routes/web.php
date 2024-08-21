@@ -1,14 +1,13 @@
 <?php
 
-use App\Criteria\FilterOperator;
 use App\Events\PrivateMessage;
 use App\Events\PublicMessage;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\GetUsersByCriteriaController;
-use App\Models\Product;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SalesController;
+use App\Models\Product;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/articles', ArticleController::class);
 

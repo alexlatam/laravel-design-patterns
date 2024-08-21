@@ -2,11 +2,11 @@
 
 namespace App\ApplicationServices;
 
-use App\Criteria\Criteria;
-use App\Criteria\Filters;
-use App\Criteria\Order;
 use App\DTOs\SearchUsersByCriteriaDto;
 use App\Repositories\EloquentUserRepository;
+use Criteria\Criteria;
+use Criteria\Filters;
+use Criteria\Order;
 
 final readonly class SearchUsersByCriteria
 {

@@ -15,8 +15,7 @@ use App\Bus\Query;
 final class FindSaleQuery extends Query
 {
     public function __construct(private readonly string $id)
-    {
-    }
+    {}
 
     public function getId(): string
     {

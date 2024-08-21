@@ -2,10 +2,10 @@
 
 namespace App\Repositories;
 
-use App\Criteria\Converters\EloquentCriteriaConverter;
-use App\Criteria\Criteria;
 use App\Models\User;
 use App\Repositories\Contracts\UserRepositoryInterface;
+use Criteria\Converters\EloquentCriteriaConverter;
+use Criteria\Criteria;
 
 final class EloquentUserRepository extends EloquentCriteriaAbstractRepository implements UserRepositoryInterface
 {

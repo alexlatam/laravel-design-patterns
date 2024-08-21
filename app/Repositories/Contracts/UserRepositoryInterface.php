@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Contracts;
 
-use App\Criteria\Criteria;
+use Criteria\Criteria;
 
 interface UserRepositoryInterface
 {
