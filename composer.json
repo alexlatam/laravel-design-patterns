@@ -38,7 +38,8 @@
             "Criteria\\": "src/Criteria/",
             "CQRS\\": "src/CQRS/",
             "Cache\\": "src/Cache/",
-            "Transactions\\": "src/Transactions/"
+            "Transactions\\": "src/Transactions/",
+            "DDD\\": "src/DDD/"
         }
     },
     "autoload-dev": {
