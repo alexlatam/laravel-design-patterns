@@ -2,7 +2,8 @@
 
 namespace DDD\SimpleApplicationService\Infrastructure\Controllers;
 
-use DDD\SimpleApplicationService\Application\StorePostReviewUseCase;
+use DDD\SimpleCommandHandler\Application\CreatePostReviewCommand;
+use DDD\SimpleCommandHandler\Application\StorePostReviewCommandHandler;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -10,19 +11,21 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class PostCreatePostReviewController
 {
-    public function __construct(private readonly StorePostReviewUseCase $useCase)
+    public function __construct(private readonly StorePostReviewCommandHandler $commandHandler)
     {
     }
 
     public function __invoke(Request $request): JsonResponse
     {
-        $postId = $request->get('id');
-        $authorId = $request->get('user_id');
-        $title = $request->get('title');
-        $content = $request->get('content');
+        $command = new CreatePostReviewCommand(
+            $request->get('id'),
+            $request->get('user_id'),
+            $request->get('title'),
+            $request->get('content'),
+        );
 
         try {
-            $this->useCase->execute($postId, $authorId, $title, $content);
+            $this->commandHandler->handle($command);
 
             return response()->json([
                 'success' => true
