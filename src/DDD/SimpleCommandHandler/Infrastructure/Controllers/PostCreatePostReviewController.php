@@ -1,6 +1,6 @@
 <?php
 
-namespace DDD\SimpleApplicationService\Infrastructure\Controllers;
+namespace DDD\SimpleCommandHandler\Infrastructure\Controllers;
 
 use DDD\SimpleCommandHandler\Application\CreatePostReviewCommand;
 use DDD\SimpleCommandHandler\Application\StorePostReviewCommandHandler;

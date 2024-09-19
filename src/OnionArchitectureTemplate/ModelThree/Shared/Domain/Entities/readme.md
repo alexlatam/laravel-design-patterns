@@ -1,0 +1,1 @@
+# Domain - Bound Context - Entities

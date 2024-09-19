@@ -6,4 +6,5 @@ This is a simple project to demonstrate the Clean Architecture using Domain-Driv
 
 1. SimpleApplicationService: 
 2. SimpleCommandHandler:
-3. SimpleCommandHandlerWithEventDispatcher:
+3. CommandHandlerWithDecorator:
+4. CommandHandlerWithEventDispatcher:

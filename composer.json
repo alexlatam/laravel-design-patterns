@@ -39,7 +39,8 @@
             "CQRS\\": "src/CQRS/",
             "Cache\\": "src/Cache/",
             "Transactions\\": "src/Transactions/",
-            "DDD\\": "src/DDD/"
+            "DDD\\": "src/DDD/",
+            "OnionArchitectureTemplate\\": "src/OnionArchitectureTemplate"
         }
     },
     "autoload-dev": {

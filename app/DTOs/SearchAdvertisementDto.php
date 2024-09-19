@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Dtos;
+namespace App\DTOs;
 
 readonly class SearchAdvertisementDto
 {
