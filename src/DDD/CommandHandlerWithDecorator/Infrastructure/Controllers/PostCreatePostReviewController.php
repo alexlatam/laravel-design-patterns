@@ -10,10 +10,10 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-final class PostCreatePostReviewController
+final readonly class PostCreatePostReviewController
 {
     public function __construct(
-        private readonly LoggerDecorator $loggerDecorator,
+        private LoggerDecorator $loggerDecorator,
     ) {
     }
 

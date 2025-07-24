@@ -2,6 +2,14 @@
 
 namespace DDD\CommandHandlerWithDecorator\Domain;
 
-class PostId extends UuidValueObject
+readonly class PostId
 {
+    public function __construct(private string $value)
+    {
+    }
+
+    public function getValue(): string
+    {
+        return $this->value;
+    }
 }

@@ -7,13 +7,17 @@ use DDD\CommandHandlerWithDecorator\Application\StorePostReviewCommandHandler;
 use Monolog\Level;
 use Monolog\Logger;
 
-class LoggerDecorator
+/**
+ * Este decorator decora al Command Handler principal. Osea el Command Handler que ejecuta la accion principal.
+ * En este caso el Command Handler principal es StorePostReviewCommandHandler y este decorator es LoggerDecorator.
+ * El objectivo de esta clase es loggear la accion que se esta ejecutando, antes de ejecutarse.
+ */
+readonly class LoggerDecorator
 {
     public function __construct(
-        private readonly StorePostReviewCommandHandler $commandHandler,
-        private readonly Logger $logger
-    )
-    {
+        private StorePostReviewCommandHandler $commandHandler,
+        private Logger                        $logger
+    ) {
     }
 
     public function handle(CreatePostReviewCommand $command): void

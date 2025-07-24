@@ -8,7 +8,9 @@ namespace CQRS\Shared\Domain\Bus\Commands;
  */
 interface CommandBusInterface
 {
+    // Método que se encarga de despachar un comando.
     public function dispatch(Command $command): mixed;
 
+    // Método que se encarga de registrar un comando.
     public function register(array $map): void;
 }

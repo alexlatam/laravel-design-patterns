@@ -4,7 +4,7 @@ namespace DomainEvents\RecordOnAggNamedConstructorAndDispatchOnApplicationServic
 
 interface DomainEventSubscriberInterface
 {
-//    public function on(DomainEvent $event): void;
+    public function on(DomainEvent $event): void;
 
     public function subscribedTo(): array;
 }

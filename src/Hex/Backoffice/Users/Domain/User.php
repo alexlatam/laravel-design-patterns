@@ -26,6 +26,58 @@ final readonly class User
     ) {
     }
 
+    /**
+     * @throws UserUuidIsEmptyException
+     * @throws UserNameIsEmptyException
+     * @throws UserCreatedAtIsEmptyException
+     * @throws UserPasswordIsEmptyException
+     * @throws UserEmailIsEmptyException
+     */
+    public static function create(
+        string $id,
+        string $name,
+        string $email,
+        string $password,
+        string $createdAt,
+        string $updatedAt
+    ): self {
+        return new self(
+            new UserUuid($id),
+            new UserName($name),
+            new UserEmail($email),
+            new UserPassword($password),
+            new UserCreatedAt($createdAt),
+            new UserUpdatedAt($updatedAt)
+        );
+        // throw event UserCreated
+    }
+
+    /**
+     * This method is useful to rebuild a User instance from the repository. To avoid dispatching unwanted events.
+     * @throws UserEmailIsEmptyException
+     * @throws UserPasswordIsEmptyException
+     * @throws UserCreatedAtIsEmptyException
+     * @throws UserUuidIsEmptyException
+     * @throws UserNameIsEmptyException
+     */
+    public static function build(
+        string $id,
+        string $name,
+        string $email,
+        string $password,
+        string $createdAt,
+        string $updatedAt
+    ): self {
+        return new self(
+            new UserUuid($id),
+            new UserName($name),
+            new UserEmail($email),
+            new UserPassword($password),
+            new UserCreatedAt($createdAt),
+            new UserUpdatedAt($updatedAt)
+        );
+    }
+
     public function getId(): string
     {
         return $this->id;
@@ -54,31 +106,6 @@ final readonly class User
     public function getUpdatedAt(): string
     {
         return $this->updatedAt;
-    }
-
-    /**
-     * @throws UserUuidIsEmptyException
-     * @throws UserNameIsEmptyException
-     * @throws UserCreatedAtIsEmptyException
-     * @throws UserPasswordIsEmptyException
-     * @throws UserEmailIsEmptyException
-     */
-    public static function create(
-        string $id,
-        string $name,
-        string $email,
-        string $password,
-        string $createdAt,
-        string $updatedAt
-    ): self {
-        return new self(
-            new UserUuid($id),
-            new UserName($name),
-            new UserEmail($email),
-            new UserPassword($password),
-            new UserCreatedAt($createdAt),
-            new UserUpdatedAt($updatedAt)
-        );
     }
 
 }

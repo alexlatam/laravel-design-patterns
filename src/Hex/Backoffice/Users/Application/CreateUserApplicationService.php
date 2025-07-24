@@ -2,6 +2,11 @@
 
 namespace Hex\Backoffice\Users\Application;
 
+use Hex\Backoffice\Users\Domain\Exceptions\UserCreatedAtIsEmptyException;
+use Hex\Backoffice\Users\Domain\Exceptions\UserEmailIsEmptyException;
+use Hex\Backoffice\Users\Domain\Exceptions\UserNameIsEmptyException;
+use Hex\Backoffice\Users\Domain\Exceptions\UserPasswordIsEmptyException;
+use Hex\Backoffice\Users\Domain\Exceptions\UserUuidIsEmptyException;
 use Hex\Backoffice\Users\Domain\User as UserEntity;
 use Hex\Backoffice\Users\Domain\UserRepositoryInterface;
 
@@ -12,6 +17,13 @@ final readonly class CreateUserApplicationService
     ) {
     }
 
+    /**
+     * @throws UserEmailIsEmptyException
+     * @throws UserPasswordIsEmptyException
+     * @throws UserCreatedAtIsEmptyException
+     * @throws UserNameIsEmptyException
+     * @throws UserUuidIsEmptyException
+     */
     public function __invoke(CreateUserCommand $command): void
     {
         $user = UserEntity::create(

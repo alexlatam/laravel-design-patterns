@@ -11,6 +11,7 @@ use DomainEvents\RecordOnAggNamedConstructorAndDispatchOnApplicationService\Doma
 use DomainEvents\RecordOnAggNamedConstructorAndDispatchOnApplicationService\Domain\ValueObjects\UserName;
 use DomainEvents\RecordOnAggNamedConstructorAndDispatchOnApplicationService\Domain\ValueObjects\UserPassword;
 use DomainEvents\RecordOnAggNamedConstructorAndDispatchOnApplicationService\Domain\ValueObjects\UserStatus;
+use Exception;
 
 class User extends AggregateRoot
 {
@@ -80,14 +81,32 @@ class User extends AggregateRoot
 
     /**
      * Metdo para archivar un usuario
+     * @throws Exception
      */
     public function archive(): void
     {
+        if($this->isArchived()) {
+            throw new Exception('This user is already archived');
+        }
+        if($this->isActive()) {
+            throw new Exception('An active user cannot be archived');
+        }
+
         $this->status = new UserStatus(UserStatus::ARCHIVED);
 
         $this->record(new UserArchivedDomainEvent(
             aggregateId: $this->uuid->value(),
             status: $this->status->value(),
         ));
+    }
+
+    private function isArchived(): bool
+    {
+        return $this->status->value() === UserStatus::ARCHIVED;
+    }
+
+    private function isActive(): bool
+    {
+        return $this->status->value() === UserStatus::ACTIVE;
     }
 }

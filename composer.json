@@ -33,6 +33,7 @@
             "Modules\\": "src/Modules/",
             "Core\\": "src/Core/",
             "Hex\\": "src/Hex/",
+            "Hexagonal\\": "src/Hexagonal/",
             "DomainEvents\\": "src/DomainEvents/",
             "Testing\\": "src/Testing/",
             "Criteria\\": "src/Criteria/",

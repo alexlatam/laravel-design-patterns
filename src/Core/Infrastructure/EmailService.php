@@ -2,8 +2,8 @@
 
 namespace Core\Infrastructure;
 
-use DomainEvents\SendMails\Domain\Contracts\EmailSenderInterface;
-use DomainEvents\SendMails\Domain\WelcomeEmail;
+use DomainEvents\Shared\SendMails\Domain\Contracts\EmailSenderInterface;
+use DomainEvents\Shared\SendMails\Domain\WelcomeEmail;
 use Illuminate\Support\Facades\Mail;
 
 final class EmailService implements EmailSenderInterface

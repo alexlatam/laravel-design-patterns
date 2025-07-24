@@ -2,10 +2,11 @@
 
 namespace DomainEvents\DispatchingOnApplicationServices\Application;
 
-use DomainEvents\DispatchingOnApplicationServices\Domain\Contracts\UserRepositoryInterface;
+use DomainEvents\DispatchingOnApplicationServices\Domain\Events\DomainEvents;
 use DomainEvents\DispatchingOnApplicationServices\Domain\Events\EventBusInterface;
-use DomainEvents\DispatchingOnApplicationServices\Domain\Events\UserRegisteredDomainEvent;
-use DomainEvents\DispatchingOnApplicationServices\Domain\User;
+use DomainEvents\DispatchingOnApplicationServices\Domain\User\User;
+use DomainEvents\DispatchingOnApplicationServices\Domain\User\UserRegisteredDomainEvent;
+use DomainEvents\DispatchingOnApplicationServices\Domain\User\UserRepositoryInterface;
 
 /**
  * Este es el caso de uso [Servicio de Aplicacion][Application Service] que se encarga de orquestar la creación de un usuario
@@ -33,13 +34,12 @@ final readonly class UserRegisterApplicationService
          * Aqui despachamos [disparamos, publicamos] los eventos de dominio que se han generado en el agregado
          * El metodo que despacha los eventos, puede llamarse: dispatch, publish, raise, emit, notify, etc.
          */
-        $this->eventBus->publish([
+        $this->eventBus->publish(
             new UserRegisteredDomainEvent(
                 $command->id(),
                 $command->name(),
                 $command->email(),
                 $command->password(),
-            )
-        ]);
+        ));
     }
 }

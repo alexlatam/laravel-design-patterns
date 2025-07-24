@@ -11,9 +11,11 @@ final readonly class StorePostReviewUseCase
     {
     }
 
-    public function execute(string $postId, string $authorId, string $title, string $content): void
+    public function execute(StorePostReviewDto $dto): void
     {
-        $review = Review::create($postId, $authorId, $title, $content);
+        // Se crea la entidad Post Review y luego se persiste.
+        // ES importante crear la entidad, pues alli se validan las reglas de negocio.
+        $review = Review::create($dto->getPostId(), $dto->getAuthorId(), $dto->getTitle(), $dto->getContent());
         $this->repository->store($review);
     }
 }

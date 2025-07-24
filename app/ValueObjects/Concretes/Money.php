@@ -2,34 +2,93 @@
 
 namespace App\ValueObjects\Concretes;
 
-use App\ValueObjects\Primitives\Number;
+use InvalidArgumentException;
 
-class Money extends Number
+class Money
 {
-    protected function __construct(int|float $value)
+    private int $amount;
+    private Currency $currency;
+
+    public static function fromMoney(self $aMoney): self
     {
-        parent::__construct($value);
+        return new self(
+            $aMoney->amount(),
+            $aMoney->currency()
+        );
     }
 
-    public function cents(): int
+    public static function fromCurrency(Currency $aCurrency): self
     {
-        return (int) round($this->value() * 100);
+        return new self(0, $aCurrency);
     }
 
-    /**
-     * Este metodo retorna el valor formateado en dolares. Ej. $1,000.00
-     */
-    public function formatted(): string
-    {
-        return (new \NumberFormatter(config('app.locale'), \NumberFormatter::CURRENCY))->formatCurrency($this->value(), 'USD');
+    public static function fromAmountAndCurrency(
+        int $anAmount,
+        Currency $aCurrency
+    ): self {
+        return new self(
+            $anAmount,
+            $aCurrency
+        );
     }
 
-    public function toArray(): array
+    private function __construct(int $anAmount, Currency $aCurrency)
     {
-        return [
-            'value' => $this->value(),
-            'cents' => $this->cents(),
-            'formatted' => $this->formatted(),
-        ];
+        $this->setAmount($anAmount);
+        $this->setCurrency($aCurrency);
+    }
+
+    private function setAmount($anAmount): void
+    {
+        $this->amount = (int) $anAmount;
+    }
+
+    private function setCurrency(Currency $aCurrency): void
+    {
+        $this->currency = $aCurrency;
+    }
+
+    public function amount(): int
+    {
+        return $this->amount;
+    }
+
+    public function currency(): Currency
+    {
+        return $this->currency;
+    }
+
+    public function increaseAmountBy(int $anAmount): self
+    {
+        return new self(
+            $this->amount() + $anAmount,
+            $this->currency()
+        );
+    }
+
+    public function isEquals(self $aMoney): bool
+    {
+        return
+            $aMoney->currency()->isEquals($this->currency()) &&
+            $aMoney->amount() === $this->amount();
+    }
+
+    public function add(self $aMoney): self
+    {
+        $this->guardSameCurrencies($aMoney);
+
+        return new self(
+            $aMoney->amount() + $this->amount(),
+            $this->currency()
+        );
+    }
+
+    private function guardSameCurrencies(self $aMoney): void
+    {
+        if (!$aMoney->currency()->isEquals($this->currency())) {
+            throw new InvalidArgumentException(
+                'Currencies do not match'
+            );
+        }
     }
 }

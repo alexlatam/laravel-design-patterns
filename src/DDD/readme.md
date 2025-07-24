@@ -4,7 +4,8 @@ This is a simple project to demonstrate the Clean Architecture using Domain-Driv
 
 ## Folders
 
-1. SimpleApplicationService: 
+1. SimpleApplicationService:
+Controller -> ApplicationService -> Repository
 2. SimpleCommandHandler:
 3. CommandHandlerWithDecorator:
 4. CommandHandlerWithEventDispatcher:

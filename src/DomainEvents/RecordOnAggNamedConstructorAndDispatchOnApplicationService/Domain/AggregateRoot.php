@@ -21,13 +21,15 @@ class AggregateRoot
 
     /**
      * Metodo que se encarga de obtener los eventos que se han producido en el agregado.
-     * Ademas, limpia el array de eventos.
      */
     public function pullDomainEvents(): array
     {
+        // obtenemos los eventos que se han registrado
         $events = $this->events;
+        // limpiamos el array de eventos
         $this->events = [];
 
+        // retornamos los eventos
         return $events;
     }
 }

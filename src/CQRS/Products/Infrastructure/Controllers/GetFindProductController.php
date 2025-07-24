@@ -16,7 +16,9 @@ final readonly class GetFindProductController
 
     public function __invoke(Request $request): JsonResponse
     {
-        $product = $this->queryBus->ask(new FindProductQuery($request->input('id')));
+        $product = $this->queryBus->ask(
+            new FindProductQuery($request->input('id'))
+        );
 
         return new JsonResponse($product, Response::HTTP_CREATED);
     }

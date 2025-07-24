@@ -3,7 +3,12 @@
 namespace Hex\Backoffice\Users\Infrastructure\Persistence\Repositories;
 
 use Hex\Backoffice\Users\Domain\Exceptions\UserAlreadyExistsException;
+use Hex\Backoffice\Users\Domain\Exceptions\UserCreatedAtIsEmptyException;
+use Hex\Backoffice\Users\Domain\Exceptions\UserEmailIsEmptyException;
+use Hex\Backoffice\Users\Domain\Exceptions\UserNameIsEmptyException;
 use Hex\Backoffice\Users\Domain\Exceptions\UserNotFoundException;
+use Hex\Backoffice\Users\Domain\Exceptions\UserPasswordIsEmptyException;
+use Hex\Backoffice\Users\Domain\Exceptions\UserUuidIsEmptyException;
 use Hex\Backoffice\Users\Domain\User as UserEntity;
 use Hex\Backoffice\Users\Domain\UserRepositoryInterface;
 use Hex\Backoffice\Users\Infrastructure\Persistence\Models\User;
@@ -52,9 +57,16 @@ class EloquentUserRepository implements UserRepositoryInterface
         $eloquentModel->save();
     }
 
+    /**
+     * @throws UserEmailIsEmptyException
+     * @throws UserPasswordIsEmptyException
+     * @throws UserCreatedAtIsEmptyException
+     * @throws UserNameIsEmptyException
+     * @throws UserUuidIsEmptyException
+     */
     private function mapToEntity(User $eloquentModel): UserEntity
     {
-        return UserEntity::create(
+        return UserEntity::build(
             $eloquentModel->id,
             $eloquentModel->name,
             $eloquentModel->email,

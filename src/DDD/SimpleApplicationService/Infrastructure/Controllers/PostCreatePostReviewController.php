@@ -2,6 +2,7 @@
 
 namespace DDD\SimpleApplicationService\Infrastructure\Controllers;
 
+use DDD\SimpleApplicationService\Application\StorePostReviewDto;
 use DDD\SimpleApplicationService\Application\StorePostReviewUseCase;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -21,8 +22,10 @@ final class PostCreatePostReviewController
         $title = $request->get('title');
         $content = $request->get('content');
 
+        $dto = new StorePostReviewDto($postId, $authorId, $title, $content);
+
         try {
-            $this->useCase->execute($postId, $authorId, $title, $content);
+            $this->useCase->execute($dto);
 
             return response()->json([
                 'success' => true

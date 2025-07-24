@@ -3,25 +3,22 @@
 namespace Cache\OnTheUseCase\Domain\ValueObjects;
 
 use Exception;
+use InvalidArgumentException;
 
 // Money Pattern
-class Money
+readonly class Money
 {
-    private int $amount;
-    private int $decimals;
-    private Currency $currency;
-
     /**
      * @throws Exception
      */
-    public function __construct(int $amount, Currency $currency, int $decimals = 2)
-    {
-        if($amount < 0){
+    public function __construct(
+        private int      $amount,
+        private Currency $currency,
+        private int      $decimals = 2
+    ) {
+        if ($amount < 0) {
             throw new Exception('Amount must be positive');
         }
-        $this->amount = $amount;
-        $this->currency = $currency;
-        $this->decimals = $decimals;
     }
 
     public function amount(): int
@@ -37,5 +34,55 @@ class Money
     public function isoCode(): string
     {
         return $this->currency->value();
+    }
+
+    public function currency(): Currency
+    {
+        return $this->currency;
+    }
+
+    public function decimals(): int
+    {
+        return $this->decimals;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function add(self $aMoney): self
+    {
+        $this->validateSameCurrencies($aMoney);
+
+        return new self(
+            $this->amount() + $aMoney->amount(),
+            $this->currency(),
+            $this->decimals()
+        );
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function subtract(self $aMoney): self
+    {
+        $this->validateSameCurrencies($aMoney);
+
+        return new self(
+            max(0, $this->amount() - $aMoney->amount()),
+            $this->currency(),
+            $this->decimals()
+        );
+    }
+
+    /**
+     * @param Money $aMoney
+     */
+    private function validateSameCurrencies(Money $aMoney): void
+    {
+        if (!$aMoney->currency()->equals($this->currency())) {
+            throw new InvalidArgumentException(
+                'Currencies do not match'
+            );
+        }
     }
 }

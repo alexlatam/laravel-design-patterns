@@ -173,6 +173,8 @@ return [
         Hex\Backoffice\Users\Infrastructure\ServiceProviders\CreateUserCommandBusServiceProvider::class,
         Hex\Backoffice\Users\Infrastructure\ServiceProviders\CreateUserRouteServiceProvider::class,
         CQRS\Products\Infrastructure\ServiceProviders\CQRSServiceProvider::class,
+        DDD\RealExample\Shared\Infrastructure\Providers\DDDServiceProvider::class,
+        DDD\RealExample\Shared\Infrastructure\Providers\DDDRouteServiceProvider::class,
     ])->toArray(),
 
     /*

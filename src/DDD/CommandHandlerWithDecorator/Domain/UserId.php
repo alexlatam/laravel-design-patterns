@@ -2,6 +2,14 @@
 
 namespace DDD\CommandHandlerWithDecorator\Domain;
 
-class UserId extends UuidValueObject
+readonly class UserId
 {
+    public function __construct(private string $value)
+    {
+    }
+
+    public function getValue(): string
+    {
+        return $this->value;
+    }
 }
