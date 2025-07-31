@@ -2,17 +2,18 @@
 
 namespace Criteria\SearchUsers\Application;
 
-use Criteria\SearchUsers\Domain\Contracts\ProductsRepositoryInterface;
+use Criteria\SearchUsers\Domain\Contracts\UserRepositoryInterface;
+use Criteria\SearchUsers\Domain\Users;
 use Criteria\Shared\Domain\Criteria\Criteria;
 
 final readonly class SearchUsersUseCase
 {
     public function __construct(
-        private ProductsRepositoryInterface $repository
+        private UserRepositoryInterface $repository
     ) {
     }
 
-    public function execute(Criteria $criteria): array
+    public function execute(Criteria $criteria): Users
     {
         return $this->repository->matching($criteria);
     }

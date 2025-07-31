@@ -1,6 +1,8 @@
 <?php
 
 use App\Providers\RepositoryServiceProvider;
+use DDD\CommandHandlerWithCommandBus\Shared\Infrastructure\Providers\CommandHandlerWithCommandBusServiceProvider;
+use DDD\CommandHandlerWithCommandBusWithoutAttachCommandHandler\Shared\Infrastructure\Providers\CommandHandlerWithCommandBusWithoutAttachCommandHandlerServiceProvider;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
@@ -175,6 +177,13 @@ return [
         CQRS\Products\Infrastructure\ServiceProviders\CQRSServiceProvider::class,
         DDD\RealExample\Shared\Infrastructure\Providers\DDDServiceProvider::class,
         DDD\RealExample\Shared\Infrastructure\Providers\DDDRouteServiceProvider::class,
+
+
+        /**
+         * DDD
+         */
+        CommandHandlerWithCommandBusServiceProvider::class,
+        CommandHandlerWithCommandBusWithoutAttachCommandHandlerServiceProvider::class,
     ])->toArray(),
 
     /*

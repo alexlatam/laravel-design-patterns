@@ -3,7 +3,6 @@
 namespace DDD\CommandHandlerWithDecorator\Infrastructure\Controllers;
 
 use DDD\CommandHandlerWithDecorator\Application\CreatePostReviewCommand;
-use DDD\CommandHandlerWithDecorator\Application\StorePostReviewCommandHandler;
 use DDD\CommandHandlerWithDecorator\Infrastructure\Logger\LoggerDecorator;
 use Exception;
 use Illuminate\Http\JsonResponse;

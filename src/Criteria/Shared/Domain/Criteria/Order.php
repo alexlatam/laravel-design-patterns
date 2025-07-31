@@ -12,9 +12,8 @@ final readonly class Order
          * P.ej: 'name', 'email', 'age', etc.
          */
         private OrderBy $orderBy,
-        /**
-         * Tipo de orden. Ascendente, descendente o none [Asc, Desc, None]
-         */
+
+        // Tipo de orden. Ascendente, descendente o none [Asc, Desc, None]
         private OrderType $orderType
     ) {}
 

@@ -18,7 +18,7 @@ abstract class StringValueObject
     protected function validate(): void
     {
         if (empty($this->value)) {
-            throw new InvalidArgumentException('El texto no puede estar vacio');
+            throw new InvalidArgumentException('The value cannot be empty.');
         }
     }
 }

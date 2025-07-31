@@ -25,6 +25,7 @@ final readonly class SqlCriteriaConverter implements CriteriaConverterInterface
 
             $whereQuery = [];
             foreach ($criteria->filters() as $filter) {
+                // EX: date > '2023-01-01' | name LIKE '%John%'
                 $whereQuery[] = "{$filter->field->value} {$filter->operator->value} '{$filter->value->value}'";
             }
 

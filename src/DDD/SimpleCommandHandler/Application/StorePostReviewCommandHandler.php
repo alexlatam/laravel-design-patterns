@@ -6,7 +6,7 @@ use DDD\SimpleCommandHandler\Domain\IStorePostReviewRepository;
 use DDD\SimpleCommandHandler\Domain\Review;
 
 /**
- * Esto es un CommandHandler: BAsicamente es un Servicio de Aplicacion que recibe un comando y ejecuta una accion.
+ * Esto es un CommandHandler: Basicamente es un Servicio de Aplicacion que recibe un comando y ejecuta una accion.
  * En este caso se recibe un Dto con los datos necesarios para crear una Review y se crea la entidad Review y se persiste.
  */
 final readonly class StorePostReviewCommandHandler

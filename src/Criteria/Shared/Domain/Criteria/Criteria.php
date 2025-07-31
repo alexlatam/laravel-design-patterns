@@ -26,17 +26,14 @@ final readonly class Criteria
          * Cada Filter es un campo de la tabla que se quiere filtrar
          */
         private Filters $filters,
-        /**
-         * Ascendente o descendente [Asc, Desc]
-         */
+
+        // Campo por el cual se van a ordenar los resultados.
         private ?Order $order,
-        /**
-         * Offset. [0, 10, 20, 30, ...]
-         */
+
+        // Offset. [0, 10, 20, 30, ...]
         private ?int $pageSize,
-        /**
-         * Number of page. [1, 2, 3, 4, ...]
-         */
+
+        // Number of page. [1, 2, 3, 4, ...]
         private ?int $pageNumber,
     ) {
         if (!is_null($pageNumber) && is_null($pageSize)) {

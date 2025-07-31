@@ -2,7 +2,7 @@
 
 namespace DomainEvents\Shared\SendMails\Domain;
 
-use Core\Domain\StringValueObject;
+use CQRS\Products\Domain\ValueObjects\StringValueObject;
 
 class EmailAddress extends StringValueObject
 {
