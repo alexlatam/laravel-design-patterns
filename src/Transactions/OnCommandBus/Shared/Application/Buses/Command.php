@@ -1,6 +1,6 @@
 <?php
 
-namespace DDD\CommandHandlerWithCommandBus\Shared\Application\Buses;
+namespace Transactions\OnCommandBus\Shared\Application\Buses;
 
 abstract class Command
 {

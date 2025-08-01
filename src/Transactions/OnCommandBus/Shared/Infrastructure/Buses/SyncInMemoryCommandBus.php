@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace DDD\CommandHandlerWithCommandBus\Shared\Infrastructure\Buses;
+namespace Transactions\OnCommandBus\Shared\Infrastructure\Buses;
 
-use DDD\CommandHandlerWithCommandBus\Shared\Application\Buses\Command;
-use DDD\CommandHandlerWithCommandBus\Shared\Application\Buses\CommandBusInterface;
-use DDD\CommandHandlerWithCommandBus\Shared\Application\Buses\CommandHandlerInterface;
+use Transactions\OnCommandBus\Shared\Application\Buses\Command;
+use Transactions\OnCommandBus\Shared\Application\Buses\CommandBusInterface;
+use Transactions\OnCommandBus\Shared\Application\Buses\CommandHandlerInterface;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 
