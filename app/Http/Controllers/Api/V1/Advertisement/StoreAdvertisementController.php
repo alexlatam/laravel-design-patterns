@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\V1\Advertisement;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAdvertisementRequest;
 use App\Repositories\Contracts\AdvertisementRepositoryInterface;
-use App\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;

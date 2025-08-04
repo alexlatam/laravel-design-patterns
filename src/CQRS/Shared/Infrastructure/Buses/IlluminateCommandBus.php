@@ -1,6 +1,6 @@
 <?php
 
-namespace CQRS\Products\Infrastructure\Buses;
+namespace CQRS\Shared\Infrastructure\Buses;
 
 use CQRS\Shared\Domain\Bus\Commands\Command;
 use CQRS\Shared\Domain\Bus\Commands\CommandBusInterface;
@@ -16,13 +16,14 @@ final class IlluminateCommandBus implements CommandBusInterface
         protected IlluminateCommandDispatcher $dispatcher,
     ) {}
 
-    public function dispatch(Command $command): mixed
+    public function dispatch(Command $command): void
     {
-        return $this->dispatcher->dispatch($command);
+        $this->dispatcher->dispatch($command);
     }
 
-    public function register(array $map): void
+    public function register(string $command, string $handler): void
     {
-        $this->dispatcher->map($map);
+        // [CreateProductCommand::class => CreateProductCommandHandler::class]
+        $this->dispatcher->map([$command => $handler]);
     }
 }

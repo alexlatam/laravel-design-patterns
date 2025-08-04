@@ -4,6 +4,7 @@ namespace CQRS\Products\Application\Create;
 
 use CQRS\Products\Domain\Product;
 use CQRS\Products\Domain\Repositories\ProductRepositoryInterface;
+use CQRS\Shared\Domain\Bus\Commands\Command;
 use CQRS\Shared\Domain\Bus\Commands\CommandHandler;
 
 /**
@@ -15,7 +16,7 @@ use CQRS\Shared\Domain\Bus\Commands\CommandHandler;
  * Y se los pasa al Use Case. En este caso no hay Use Case. Solo un repositorio.
  * Este Command Handler iria dentro de la capa de Application. En caso de Hexagonal Architecture.
  */
-final class CreateProductCommandHandler extends CommandHandler
+final class CreateProductCommandHandler implements CommandHandler
 {
     // Inyectamos el repositorio que se encargara de crear la venta
     public function __construct(
@@ -24,13 +25,13 @@ final class CreateProductCommandHandler extends CommandHandler
     }
 
     // Handle es el metodo que se encarga de ejecutar la lógica de negocio del command
-    public function handle(CreateProductCommand $command): void
+    public function handle(Command $command): void
     {
         $this->repository->save(Product::create(
-            id: $command->getId(),
-            title: $command->getTitle(),
-            price: $command->getPrice(),
-            image: $command->getImage(),
+            id: $command->id,
+            title: $command->title,
+            price: $command->price,
+            image: $command->image,
         ));
     }
 }

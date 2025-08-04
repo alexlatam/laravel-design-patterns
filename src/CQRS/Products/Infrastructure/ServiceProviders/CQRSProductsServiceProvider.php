@@ -7,22 +7,24 @@ use CQRS\Products\Application\Create\CreateProductCommandHandler;
 use CQRS\Products\Application\Find\FindProductQuery;
 use CQRS\Products\Application\Find\FindProductQueryHandler;
 use CQRS\Products\Domain\Repositories\ProductRepositoryInterface;
-use CQRS\Products\Infrastructure\Buses\IlluminateCommandBus;
-use CQRS\Products\Infrastructure\Buses\IlluminateQueryBus;
+use CQRS\Products\Infrastructure\Repositories\EloquentProductRepository;
 use CQRS\Shared\Domain\Bus\Commands\CommandBusInterface;
 use CQRS\Shared\Domain\Bus\Queries\QueryBusInterface;
+use CQRS\Shared\Infrastructure\Buses\IlluminateCommandBus;
+use CQRS\Shared\Infrastructure\Buses\IlluminateQueryBus;
 use Illuminate\Support\ServiceProvider;
 
-class CQRSServiceProvider extends ServiceProvider
+final class CQRSProductsServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        // Registramos los singletons. En este caso solo tenemos 2 buses y 2 repositorios
+        $this->app->when(CreateProductCommandHandler::class)->needs(ProductRepositoryInterface::class)->give(EloquentProductRepository::class);
+        $this->app->when(FindProductQueryHandler::class)->needs(ProductRepositoryInterface::class)->give(EloquentProductRepository::class);
+
+        // Registramos los singletons. En este caso solo tenemos 2 buses
         $singletons = [
             CommandBusInterface::class => IlluminateCommandBus::class,
             QueryBusInterface::class => IlluminateQueryBus::class,
-
-            ProductRepositoryInterface::class => ProductRepositoryInterface::class,
         ];
 
         foreach ($singletons as $abstract => $concrete) {
@@ -52,9 +54,7 @@ class CQRSServiceProvider extends ServiceProvider
          * Y el command handler CreateSaleCommandHandler se encargara de ejecutar la lógica de negocio del command CreateSaleCommand
          * SIEMPRE la relación sera de 1 a 1 entre el Command y su Handler
          */
-        $commandBus->register([
-            CreateProductCommand::class => CreateProductCommandHandler::class,
-        ]);
+        $commandBus->register(CreateProductCommand::class, CreateProductCommandHandler::class);
 
         /**
          * Instanciamos el Query Bus, para mapear los queries con sus respectivos handlers

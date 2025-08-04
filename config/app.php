@@ -1,7 +1,7 @@
 <?php
 
 use App\Providers\RepositoryServiceProvider;
-use DDD\CommandHandlerWithCommandBus\Shared\Infrastructure\Providers\CommandHandlerWithCommandBusServiceProvider;
+use CQRS\Shared\Infrastructure\Providers\CQRSServiceProvider;
 use DDD\CommandHandlerWithCommandBusWithoutAttachCommandHandler\Shared\Infrastructure\Providers\CommandHandlerWithCommandBusWithoutAttachCommandHandlerServiceProvider;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
@@ -172,17 +172,16 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         RepositoryServiceProvider::class,
-        Hex\Backoffice\Users\Infrastructure\ServiceProviders\CreateUserCommandBusServiceProvider::class,
-        Hex\Backoffice\Users\Infrastructure\ServiceProviders\CreateUserRouteServiceProvider::class,
-        CQRS\Products\Infrastructure\ServiceProviders\CQRSServiceProvider::class,
-        DDD\RealExample\Shared\Infrastructure\Providers\DDDServiceProvider::class,
-        DDD\RealExample\Shared\Infrastructure\Providers\DDDRouteServiceProvider::class,
-
 
         /**
-         * DDD
+         * /src folder
          */
-        CommandHandlerWithCommandBusServiceProvider::class,
+        Hex\Backoffice\Users\Infrastructure\ServiceProviders\CreateUserCommandBusServiceProvider::class,
+        Hex\Backoffice\Users\Infrastructure\ServiceProviders\CreateUserRouteServiceProvider::class,
+        CQRS\Products\Infrastructure\ServiceProviders\CQRSProductsServiceProvider::class,
+        DDD\RealExample\Shared\Infrastructure\Providers\DDDServiceProvider::class,
+        DDD\RealExample\Shared\Infrastructure\Providers\DDDRouteServiceProvider::class,
+        CQRSServiceProvider::class,
         CommandHandlerWithCommandBusWithoutAttachCommandHandlerServiceProvider::class,
     ])->toArray(),
 

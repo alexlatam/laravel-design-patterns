@@ -1,6 +1,6 @@
 <?php
 
-namespace CQRS\Products\Infrastructure\Buses;
+namespace CQRS\Shared\Infrastructure\Buses;
 
 use CQRS\Shared\Domain\Bus\Queries\Query;
 use CQRS\Shared\Domain\Bus\Queries\QueryBusInterface;
