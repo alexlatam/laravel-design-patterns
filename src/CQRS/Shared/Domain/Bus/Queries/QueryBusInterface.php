@@ -8,7 +8,7 @@ namespace CQRS\Shared\Domain\Bus\Queries;
  */
 interface QueryBusInterface
 {
-    public function ask(Query $query): mixed;
+    public function ask(Query $query): QueryResponse;
 
     public function register(array $map): void;
 }

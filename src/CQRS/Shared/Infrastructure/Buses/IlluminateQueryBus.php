@@ -4,6 +4,7 @@ namespace CQRS\Shared\Infrastructure\Buses;
 
 use CQRS\Shared\Domain\Bus\Queries\Query;
 use CQRS\Shared\Domain\Bus\Queries\QueryBusInterface;
+use CQRS\Shared\Domain\Bus\Queries\QueryResponse;
 use Illuminate\Bus\Dispatcher;
 
 /**
@@ -20,9 +21,37 @@ final class IlluminateQueryBus implements QueryBusInterface
     /**
      * Este metodo es el encargado de despachar[dispatch] el Query hacia el Query Handler.
      */
-    public function ask(Query $query): mixed
+    public function ask(Query $query): QueryResponse
     {
-        return $this->dispatcher->dispatch($query);
+        $response = $this->dispatcher->dispatch($query);
+
+        // pasar de una entidad de dominio a un objeto de respuesta
+        if ($response instanceof QueryResponse) {
+            return $response;
+        }
+
+        // Si el Query Handler devuelve un objeto de dominio, lo convertimos a un array
+        if (method_exists($response, 'toArray')) {
+            return new QueryResponse($response->toArray());
+        }
+
+        // Si el Query Handler devuelve un objeto que no tiene el metodo toArray, lo convertimos a un array
+        if (is_object($response)) {
+            return new QueryResponse((array) $response);
+        }
+
+        // Si el Query Handler devuelve un array, lo convertimos a un QueryResponse
+        if (is_array($response)) {
+            return new QueryResponse($response);
+        }
+
+        // Si el Query Handler devuelve un tipo primitivo, lo convertimos a un array
+        if (is_scalar($response)) {
+            return new QueryResponse(['value' => $response]);
+        }
+
+        // Si el Query Handler devuelve un tipo no esperado, lanzamos una excepcion
+        throw new \InvalidArgumentException('El Query Handler debe devolver un objeto de dominio, un array o un tipo primitivo.');
     }
 
     /**
